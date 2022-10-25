@@ -9,7 +9,7 @@ class contenedor {
 
     async save(data) {
         try{
-          const indice = await fs.promises.readFile("./productos.txt","utf-8");
+          const indice = await fs.promises.readFile(this.filename ,"utf-8");
           console.log(indice)
           const idPro = JSON.parse(indice);
           let reg = idPro.length;
@@ -50,7 +50,7 @@ class contenedor {
     {
         try{
         console.log("*** Array all objects ***")
-        const contenidonew = await fs.promises.readFile("./productos.txt","utf-8");
+        const contenidonew = await fs.promises.readFile(this.filename ,"utf-8");
         const prod = JSON.parse(contenidonew);
         console.log(prod);
         }
@@ -97,7 +97,22 @@ class contenedor {
        console.log("*** Delete All Products ***")
        const contenidonew = await fs.promises.unlink("./productoscopia.txt");
     }
+
+    async countProductos( ){
+        try{
+          const indice = await fs.promises.readFile(this.filename ,"utf-8");
+          console.log(indice)
+          const idPro = JSON.parse(indice);
+          let reg = idPro.length;
+          return reg;
+        }
+        catch (error){
+         console.log("Error en la funcion save."+error)
+        }
+    }
 }
+
+
 
  const productos = new contenedor("./productos.txt");
  productos.save({title:"producto01",price : 25, url:"", id:0})
